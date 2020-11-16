@@ -3,11 +3,11 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       autoReload="true"
       internalLogLevel="Trace"
-      internalLogFile="c:/logs/internallog.txt">
+      internalLogFile="E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-/Logs/internallog.txt">
 
   <targets>
     <target name="logfile" xsi:type="File"
-            fileName="c:/Projects/BookStore-API/Project/logs/${shortdate}_logfile.txt"
+            fileName="E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-/Logs/${shortdate}_logfile.txt"
             layout="${longdate} ${level:uppercase=true} ${message}"/>
   </targets>
 
