@@ -1,4 +1,6 @@
+using books_api.Contracts;
 using books_api.Data;
+using books_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,6 +49,9 @@ namespace books_api
                 var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
                 c.IncludeXmlComments(xpath);
             });
+
+
+            services.AddSingleton<ILoggerService, LoggerService>();
 
             services.AddControllers();
         }

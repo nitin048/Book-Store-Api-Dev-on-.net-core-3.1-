@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2x8zKMMEaAI4fQ1xpq8FzXTsp91+nU26M7e1Ky2MmubynrQDYw8Ev68pVVjnJjs8azWhWG2xDgrMC+DGkL7HmA==",
+  "dgSpecHash": "aVLM7VuciUS3O951AWN2XPIfdeg+pXiGzYxWagYkZKfaMKv6eeJXhyN1QlpDPHhgrQLp3UE2j6S9LDz7ZaYLFA==",
   "success": true,
-  "projectFilePath": "E:\\WORK\\aspdotnet core\\books-api\\books-api\\books-api.csproj",
+  "projectFilePath": "E:\\WORK\\aspdotnet core\\Book-Store-Api-Dev-on-.net-core-3.1-\\books-api\\books-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.10\\microsoft.aspnetcore.cryptography.internal.3.1.10.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.10\\microsoft.aspnetcore.cryptography.keyderivation.3.1.10.nupkg.sha512",
@@ -46,6 +46,8 @@
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\NITIN\\.nuget\\packages\\nlog\\4.7.4\\nlog.4.7.4.nupkg.sha512",
+    "C:\\Users\\NITIN\\.nuget\\packages\\nlog.extensions.logging\\1.6.5\\nlog.extensions.logging.1.6.5.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

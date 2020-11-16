@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using books_api.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace books_api.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
+        private readonly ILoggerService _logger;
+
+        public HomeController(ILoggerService logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         ///  To get values  
         /// </summary>
@@ -20,6 +27,8 @@ namespace books_api.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+
+            _logger.logInfo("Accessed home controller");
             return new string[] { "value1", "value2" };
         }
         /// <summary>
@@ -31,6 +40,7 @@ namespace books_api.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            _logger.logDebug("this is get");
             return "value";
         }
 
@@ -43,6 +53,8 @@ namespace books_api.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            _logger.logError("this is error");
+
         }
 
 
@@ -64,6 +76,7 @@ namespace books_api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _logger.logWarn("this is a warn");
         }
     }
 }
