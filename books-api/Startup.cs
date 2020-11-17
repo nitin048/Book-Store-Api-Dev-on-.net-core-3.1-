@@ -37,6 +37,15 @@ namespace books_api
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddCors(o =>
+            {
+                o.AddPolicy("CorePolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo 
                 {
@@ -79,7 +88,9 @@ namespace books_api
             });
 
             app.UseHttpsRedirection();
-            
+
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
