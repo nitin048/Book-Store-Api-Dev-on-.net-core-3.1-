@@ -1,5 +1,7 @@
+using AutoMapper;
 using books_api.Contracts;
 using books_api.Data;
+using books_api.Mapping;
 using books_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +39,18 @@ namespace books_api
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddSwaggerGen(c => {
+
+            services.AddCors(o =>
+            {
+                o.AddPolicy("CorePolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+            services.AddAutoMapper(typeof(Maps));
+
+           services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo 
                 {
                     Title = "Book Store Api", 
@@ -79,7 +92,9 @@ namespace books_api
             });
 
             app.UseHttpsRedirection();
-            
+
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

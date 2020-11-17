@@ -160,3 +160,6 @@ E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\obj\Debug\
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\obj\Debug\netcoreapp3.1\books-api.dll
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\obj\Debug\netcoreapp3.1\books-api.pdb
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\obj\Debug\netcoreapp3.1\books-api.genruntimeconfig.cache
+E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\AutoMapper.dll
+E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\AutoMapper.Collection.dll
+E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
