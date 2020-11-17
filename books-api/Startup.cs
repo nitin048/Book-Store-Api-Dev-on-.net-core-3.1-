@@ -46,7 +46,9 @@ namespace books_api
                     .AllowAnyHeader());
             });
 
-            services.AddSwaggerGen(c => {
+            services.AddAutoMapper(typeof(Maps));
+
+           services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo 
                 {
                     Title = "Book Store Api", 
