@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace books_api.Data
+namespace books_api.DTO
 {
-    [Table ("Books")]
-    public partial class Book
+    public class BookDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,8 +14,9 @@ namespace books_api.Data
         public string Image { get; set; }
         public double? Price { get; set; }
         public string Isbn { get; set; }
-
         public int? AuthorId { get; set; }
-     
+
+        public virtual AuthorDTO Author { get; set; }
+
     }
 }

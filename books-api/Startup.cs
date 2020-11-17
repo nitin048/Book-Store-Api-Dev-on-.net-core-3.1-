@@ -1,5 +1,7 @@
+using AutoMapper;
 using books_api.Contracts;
 using books_api.Data;
+using books_api.Mapping;
 using books_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
