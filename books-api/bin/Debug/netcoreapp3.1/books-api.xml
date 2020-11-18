@@ -4,6 +4,18 @@
         <name>books-api</name>
     </assembly>
     <members>
+        <member name="T:books_api.Controllers.AuthorsController">
+            <summary>
+            Endpoint used to interface with the author in the book store's database
+            </summary>
+        </member>
+        <member name="M:books_api.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Get all Authors 
+            </summary>
+            <returns>List of Authors</returns>
+            
+        </member>
         <member name="M:books_api.Controllers.HomeController.Get">
             <summary>
              To get values  
