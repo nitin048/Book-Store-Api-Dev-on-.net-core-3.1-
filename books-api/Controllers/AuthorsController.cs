@@ -143,11 +143,11 @@ namespace books_api.Controllers
                     return BadRequest();
                 }
 
-                if (!ModelState.IsValid)
+                var isExists = await _authorRepository.IsExists(id);
+                if (!isExists)
                 {
-                    _logger.logWarn($"Author data was incompete =id {id}");
-                    return BadRequest(ModelState);
-
+                    _logger.logWarn($"Attempted Update Author with id:{id} was not found");
+                    return NotFound();
                 }
 
                 var author = _mapper.Map<Author>(authorDTO);
@@ -180,7 +180,7 @@ namespace books_api.Controllers
                 _logger.logInfo($"Author Delete Attempted = id:{id}");
                 if (id < 1 )
                 {
-                    _logger.logWarn($"Empty request is submitted = id :{id}");
+                    _logger.logWarn($"Empty request is submitted = id :{id} ");
                     return BadRequest();
                 }
                 var author = await _authorRepository.FindById(id);
