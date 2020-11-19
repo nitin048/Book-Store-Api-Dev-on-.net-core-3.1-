@@ -16,6 +16,13 @@
             <returns>List of Authors</returns>
             
         </member>
+        <member name="M:books_api.Controllers.AuthorsController.Create(books_api.DTO.AuthorCreateDTO)">
+            <summary>
+            Created Author
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
         <member name="M:books_api.Controllers.HomeController.Get">
             <summary>
              To get values  

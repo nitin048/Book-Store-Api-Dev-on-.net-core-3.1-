@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using books_api.Contracts;
+using books_api.Data;
 using books_api.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,12 @@ namespace books_api.Controllers
         private readonly IAuthorRepository _authorRepository;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
+        private object authorDTO;
 
         public AuthorsController(IAuthorRepository authorRepository, ILoggerService logger, IMapper mapper)
         {
-         _authorRepository = authorRepository;
-         _logger = logger;
+            _authorRepository = authorRepository;
+            _logger = logger;
             _mapper = mapper;
         }
         /// <summary>
@@ -36,7 +38,7 @@ namespace books_api.Controllers
         /// <returns>List of Authors</returns>
         /// 
         [HttpGet]
-        
+
         public async Task<IActionResult> GetAuthors()
         {
             try
@@ -53,7 +55,7 @@ namespace books_api.Controllers
             }
 
         }
-        
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAuthor(int id)
         {
@@ -61,7 +63,7 @@ namespace books_api.Controllers
             {
                 _logger.logInfo($"Attempted Get Author with id:{id}");
                 var author = await _authorRepository.FindById(id);
-                if(author == null)
+                if (author == null)
                 {
                     _logger.logWarn($"Attempted Get Author with id:{id} was not found");
                     return NotFound();
@@ -72,11 +74,55 @@ namespace books_api.Controllers
             }
             catch (Exception e)
             {
-               return InternalError($"{e.Message} - {e.InnerException}");
-              
+                return InternalError($"{e.Message} - {e.InnerException}");
+
             }
 
         }
+        /// <summary>
+        /// Created Author
+        /// </summary>
+        /// <param name="authorDTO"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Create([FromBody]AuthorCreateDTO authorDTO)
+        {
+            try
+            {
+                _logger.logInfo($"Author Submission Attempted");
+                if (authorDTO == null)
+                {
+                    _logger.logWarn($"Empty request is submitted ");
+                    return BadRequest(ModelState);
+                }
+
+                if(!ModelState.IsValid)
+                {
+                    _logger.logWarn($"Author data was incompete");
+                    return BadRequest(ModelState);
+
+                }
+                
+                var author = _mapper.Map<Author>(authorDTO);
+
+                var isSuccess = await _authorRepository.Create(author);
+                if(!isSuccess)
+                {
+                    return InternalError($"Author creation Failed");
+                }
+                return Created("create", new { author });
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{e.Message} - {e.InnerException}");
+
+            }
+
+        }
+
 
         private ObjectResult InternalError(string message)
         {
