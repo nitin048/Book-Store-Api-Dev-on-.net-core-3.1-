@@ -23,37 +23,12 @@
             <param name="authorDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:books_api.Controllers.HomeController.Get">
+        <member name="M:books_api.Controllers.AuthorsController.Update(System.Int32,books_api.DTO.AuthorUpdateDTO)">
             <summary>
-             To get values  
+            Update Author
             </summary>
+            <param name="author"></param>
             <returns></returns>
-        </member>
-        <member name="M:books_api.Controllers.HomeController.Get(System.Int32)">
-            <summary>
-            To get data 
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:books_api.Controllers.HomeController.Post(System.String)">
-            <summary>
-            To post data
-            </summary>
-            <param name="value"></param>
-        </member>
-        <member name="M:books_api.Controllers.HomeController.Put(System.Int32,System.String)">
-            <summary>
-            To put values 
-            </summary>
-            <param name="id"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:books_api.Controllers.HomeController.Delete(System.Int32)">
-            <summary>
-            To delete data
-            </summary>
-            <param name="id"></param>
         </member>
     </members>
 </doc>

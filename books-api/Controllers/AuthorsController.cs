@@ -85,7 +85,7 @@ namespace books_api.Controllers
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody]AuthorCreateDTO authorDTO)
@@ -122,7 +122,88 @@ namespace books_api.Controllers
             }
 
         }
+        /// <summary>
+        /// Update Author
+        /// </summary>
+        
+        /// <param name="author"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] AuthorUpdateDTO authorDTO)
+        {
+            try
+            {
+                _logger.logInfo($"Author Update Attempted = id:{id}");
+                if (id < 1 || authorDTO == null || id != authorDTO.Id)
+                {
+                    _logger.logWarn($"Empty request is submitted = id :{id} ");
+                    return BadRequest();
+                }
 
+                if (!ModelState.IsValid)
+                {
+                    _logger.logWarn($"Author data was incompete =id {id}");
+                    return BadRequest(ModelState);
+
+                }
+
+                var author = _mapper.Map<Author>(authorDTO);
+
+                var isSuccess = await _authorRepository.Update(author);
+
+                if (!isSuccess)
+                {
+                    return InternalError($"Author Updation Failed");
+                }
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{e.Message} - {e.InnerException}");
+
+            }
+
+        }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                _logger.logInfo($"Author Delete Attempted = id:{id}");
+                if (id < 1 )
+                {
+                    _logger.logWarn($"Empty request is submitted = id :{id}");
+                    return BadRequest();
+                }
+                var author = await _authorRepository.FindById(id);
+                if (author == null)
+                {
+                    return NotFound();
+                }
+
+                var isSuccess = await _authorRepository.Delete(author);
+
+                if (!isSuccess)
+                {
+                    return InternalError($"Author Deletetion Failed");
+                }
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{e.Message} - {e.InnerException}");
+
+            }
+
+        }
 
         private ObjectResult InternalError(string message)
         {
