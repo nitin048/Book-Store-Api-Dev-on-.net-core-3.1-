@@ -185,7 +185,7 @@ namespace books_api.Controllers
 
                 if (!isSuccess)
                 {
-                    return InternalError($"{location}:Book Updation Failed");
+                    return InternalError($"{location}:Book Updation Failed with id:{id}");
                 }
                 return NoContent();
             }
@@ -204,7 +204,7 @@ namespace books_api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
