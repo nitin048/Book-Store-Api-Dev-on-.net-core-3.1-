@@ -36,189 +36,230 @@ namespace books_api.Controllers
             _logger = logger;
             _mapper = mapper;
         }
+
+        #region Setting Up Get Method For Books 
         /// <summary>
-        /// Get all Authors 
+        /// Get all Books
         /// </summary>
         /// <returns>List of Authors</returns>
         /// 
-        //[HttpGet]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetBooks()
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.logInfo($"{location}:Attempted call");
+                var books = await _bookRepository.FindAll();
+                var response = _mapper.Map<List<BookDTO>>(books);
+                _logger.logInfo("Successfully got all Books");
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}:{e.Message} - {e.InnerException}");
+            }
 
-        //public async Task<IActionResult> GetAuthors()
-        //{
-        //    try
-        //    {
-        //        _logger.logInfo("Attempted Get All Authors");
-        //        var authors = await _authorRepository.FindAll();
-        //        var response = _mapper.Map<List<AuthorDTO>>(authors);
-        //        _logger.logInfo("Successfully got all Authors");
-        //        return Ok(response);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message} - {e.InnerException}");
-        //    }
+        }
 
-        //}
+        #endregion Setting Up Get Method For Books 
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetAuthor(int id)
-        //{
-        //    try
-        //    {
-        //        _logger.logInfo($"Attempted Get Author with id:{id}");
-        //        var author = await _authorRepository.FindById(id);
-        //        if (author == null)
-        //        {
-        //            _logger.logWarn($"Attempted Get Author with id:{id} was not found");
-        //            return NotFound();
-        //        }
-        //        var response = _mapper.Map<List<AuthorDTO>>(author);
-        //        _logger.logInfo($"Successfully got all Author with id :{id}");
-        //        return Ok(response);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message} - {e.InnerException}");
+        #region Setting Up Get Method By Id For Books 
+        /// <summary>
+        /// Get Book By id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> List of Books </returns>
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetBook(int id)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.logInfo($"{location}:Attempted call for id:{id}");
+                var book = await _bookRepository.FindById(id);
+                if (book == null)
+                {
+                    _logger.logWarn($"Attempted failed with id:{id} was not found");
+                    return NotFound();
+                }
+                var response = _mapper.Map<List<AuthorDTO>>(book);
+                _logger.logInfo($"Successfully got book with id :{id}");
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}:{e.Message} - {e.InnerException}");
 
-        //    }
+            }
 
-        //}
-        ///// <summary>
-        ///// Created Author
-        ///// </summary>
-        ///// <param name="authorDTO"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
-        //{
-        //    try
-        //    {
-        //        _logger.logInfo($"Author Submission Attempted");
-        //        if (authorDTO == null)
-        //        {
-        //            _logger.logWarn($"Empty request is submitted ");
-        //            return BadRequest(ModelState);
-        //        }
+        }
 
-        //        if (!ModelState.IsValid)
-        //        {
-        //            _logger.logWarn($"Author data was incompete");
-        //            return BadRequest(ModelState);
+        #endregion Setting Up Get Method By Id For Books
 
-        //        }
+        #region Setting Up Post Method for Book
+      /// <summary>
+      /// Post Method for Book
+      /// </summary>
+      /// <param name="bookDTO"></param>
+      /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Create([FromBody] BookCreateDTO bookDTO)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.logInfo($"{location}:Book Submission Attempted");
+                if (bookDTO == null)
+                {
+                    _logger.logWarn($"{location}:Empty request is submitted ");
+                    return BadRequest(ModelState);
+                }
 
-        //        var author = _mapper.Map<Author>(authorDTO);
+                if (!ModelState.IsValid)
+                {
+                    _logger.logWarn($"{location}:Book data was incompete");
+                    return BadRequest(ModelState);
 
-        //        var isSuccess = await _authorRepository.Create(author);
-        //        if (!isSuccess)
-        //        {
-        //            return InternalError($"Author creation Failed");
-        //        }
-        //        return Created("create", new { author });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message} - {e.InnerException}");
+                }
 
-        //    }
+                var book = _mapper.Map<Book>(bookDTO);
 
-        //}
-        ///// <summary>
-        ///// Update Author
-        ///// </summary>
+                var isSuccess = await _bookRepository.Create(book);
+                if (!isSuccess)
+                {
+                    return InternalError($"{location}:Book creation Failed");
+                }
+                return Created("create", new { book });
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}:{e.Message} - {e.InnerException}");
 
-        ///// <param name="author"></param>
-        ///// <returns></returns>
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> Update(int id, [FromBody] AuthorUpdateDTO authorDTO)
-        //{
-        //    try
-        //    {
-        //        _logger.logInfo($"Author Update Attempted = id:{id}");
-        //        if (id < 1 || authorDTO == null || id != authorDTO.Id)
-        //        {
-        //            _logger.logWarn($"Empty request is submitted = id :{id} ");
-        //            return BadRequest();
-        //        }
+            }
 
-        //        var isExists = await _authorRepository.IsExists(id);
-        //        if (!isExists)
-        //        {
-        //            _logger.logWarn($"Attempted Update Author with id:{id} was not found");
-        //            return NotFound();
-        //        }
+        }
 
-        //        var author = _mapper.Map<Author>(authorDTO);
+        #endregion Setting Up Post Method for Book
 
-        //        var isSuccess = await _authorRepository.Update(author);
+        #region Setting Up Put Method by Id for Book
+        /// <summary>
+        /// Put Method by Id for Book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bookDTO"></param>
+        /// <returns></returns>
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] BookUpdateDTO bookDTO)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.logInfo($"{location}:Book Update Attempted = id:{id}");
+                if (id < 1 || bookDTO == null || id != bookDTO.Id)
+                {
+                    _logger.logWarn($"{location}:Empty request is submitted = id :{id} ");
+                    return BadRequest();
+                }
 
-        //        if (!isSuccess)
-        //        {
-        //            return InternalError($"Author Updation Failed");
-        //        }
-        //        return NoContent();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message} - {e.InnerException}");
+                var isExists = await _bookRepository.IsExists(id);
+                if (!isExists)
+                {
+                    _logger.logWarn($"{location}:Attempted Update Book with id:{id} was not found");
+                    return NotFound();
+                }
 
-        //    }
+                var book = _mapper.Map<Book>(bookDTO);
 
-        //}
+                var isSuccess = await _bookRepository.Update(book);
 
+                if (!isSuccess)
+                {
+                    return InternalError($"{location}:Book Updation Failed with id:{id}");
+                }
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}:{e.Message} - {e.InnerException}");
 
-        //[HttpDelete("{id}")]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        _logger.logInfo($"Author Delete Attempted = id:{id}");
-        //        if (id < 1)
-        //        {
-        //            _logger.logWarn($"Empty request is submitted = id :{id} ");
-        //            return BadRequest();
-        //        }
-        //        var author = await _authorRepository.FindById(id);
-        //        if (author == null)
-        //        {
-        //            return NotFound();
-        //        }
+            }
 
-        //        var isSuccess = await _authorRepository.Delete(author);
+        }
+        #endregion Setting Up Put Method by Id for Book
 
-        //        if (!isSuccess)
-        //        {
-        //            return InternalError($"Author Deletetion Failed");
-        //        }
-        //        return NoContent();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message} - {e.InnerException}");
+        #region Setting Up Delete Method by Id for Book
+        /// <summary>
+        /// Delete Method by Id for Book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.logInfo($"{location}:Book Delete Attempted = id:{id}");
+                if (id < 1)
+                {
+                    _logger.logWarn($"{location}:Empty request is submitted = id :{id} ");
+                    return BadRequest();
+                }
+                var book = await _bookRepository.FindById(id);
+                if (book == null)
+                {
+                    return NotFound();
+                }
 
-        //    }
+                var isSuccess = await _bookRepository.Delete(book);
 
-        //}
+                if (!isSuccess)
+                {
+                    return InternalError($"{location}:Book Deletetion Failed");
+                }
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}:{e.Message} - {e.InnerException}");
 
-        //private ObjectResult InternalError(string message)
-        //{
-        //    _logger.logError(message);
-        //    return StatusCode(500, "Something went worng.Please contact to Admin.");
+            }
 
-        //}
+        }
+        #endregion Setting Up Delete Method by Id for Book
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        #region Funtion For Internal Error
+        private string GetControllerActionNames()
+        {
+            var controller = ControllerContext.ActionDescriptor.ControllerName;
+            var action = ControllerContext.ActionDescriptor.ActionName;
+
+            return $"{controller} - {action}";
+        }
+        #endregion Funtion For Internal Error
+
+        #region Function for Contoller action name
+        private ObjectResult InternalError(string message)
+        {
+            _logger.logError(message);
+            return StatusCode(500, "Something went worng.Please contact to Admin.");
+
+        }
+        #endregion Function for Contoller action name
+
     }
 }
