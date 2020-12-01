@@ -2,6 +2,7 @@
 using books_api.Contracts;
 using books_api.Data;
 using books_api.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace books_api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -41,6 +43,9 @@ namespace books_api.Controllers
         /// <returns>List of Authors</returns>
         /// 
         [HttpGet]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public async Task<IActionResult> GetAuthors()
         {
@@ -68,6 +73,9 @@ namespace books_api.Controllers
         /// <param name="id"></param>
         /// <returns>list of author by id </returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAuthor(int id)
         {
             var location = GetControllerActionNames();
@@ -100,6 +108,7 @@ namespace books_api.Controllers
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "Adiministrator")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -148,6 +157,7 @@ namespace books_api.Controllers
         /// <param name="author"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Adiministrator, Customer")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -198,6 +208,7 @@ namespace books_api.Controllers
         /// <returns></returns>
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Customer")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
