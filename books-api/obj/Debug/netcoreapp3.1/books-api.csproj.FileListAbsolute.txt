@@ -163,3 +163,4 @@ E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\AutoMapper.Collection.dll
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\obj\Debug\netcoreapp3.1\books-api.csprojAssemblyReference.cache
+E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\books-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
