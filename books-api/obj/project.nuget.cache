@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "djWWwuRnW/J+IChmkUm4bXx4b+RiGNoDKUiQVCQRf/icjmWZ2zRvF5HOWXru8ZMTa/zdTfLbKyIHc8Rb9/TRDQ==",
+  "dgSpecHash": "Ir2IviRc3yE9RAM7lUoi7cgpW4ula23Dij3zmDwcNFdDa5VA++tfksyb2keTHPNRXpotVKxCgLMZcltG74Y80A==",
   "success": true,
   "projectFilePath": "E:\\WORK\\aspdotnet core\\Book-Store-Api-Dev-on-.net-core-3.1-\\books-api\\books-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NITIN\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\automapper.collection\\7.0.0\\automapper.collection.7.0.0.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
+    "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.10\\microsoft.aspnetcore.cryptography.internal.3.1.10.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.10\\microsoft.aspnetcore.cryptography.keyderivation.3.1.10.nupkg.sha512",
     "C:\\Users\\NITIN\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.10\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.10.nupkg.sha512",
