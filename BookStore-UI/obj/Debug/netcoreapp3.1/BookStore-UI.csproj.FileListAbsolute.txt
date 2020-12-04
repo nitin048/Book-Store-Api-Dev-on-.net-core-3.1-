@@ -49,3 +49,4 @@ E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\obj\Deb
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\obj\Debug\netcoreapp3.1\BookStore-UI.pdb
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\obj\Debug\netcoreapp3.1\BookStore-UI.genruntimeconfig.cache
 E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\obj\Debug\netcoreapp3.1\BookStore-UI.csproj.CopyComplete
+E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
