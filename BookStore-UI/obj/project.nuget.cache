@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "cj0uKOQvnmxFQkFtE+FWG+YBgGM0WWLzrXnvAzZNWsjmucIIggdk/RVd7NpTppoHxmrgJO2mmLnHXy+wHDIvFQ==",
+  "dgSpecHash": "KDk2xYq/Yz6255mXYRg2t4RwouLkkcj84q5VGoJrOE8a8nlQvUS/i5kriHtSg+8UCT7G6+pfQY2mhTs9LAP3kw==",
   "success": true,
   "projectFilePath": "E:\\WORK\\aspdotnet core\\Book-Store-Api-Dev-on-.net-core-3.1-\\BookStore-UI\\BookStore-UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\NITIN\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
