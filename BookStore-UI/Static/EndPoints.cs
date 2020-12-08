@@ -9,8 +9,10 @@ namespace BookStore_UI.Static
     {
         public static string BaseUrl = "https://localhost:64250/";
 
-        public static string AuthorsEndpoints = $"{BaseUrl}api/authors";
+        public static string AuthorsEndpoint = $"{BaseUrl}api/authors";
         
-        public static string BooksEndpoints = $"{BaseUrl}api/books";
+        public static string BooksEndpoint = $"{BaseUrl}api/books";
+
+        public static string RegisterEndpoint = $"{BaseUrl}api/users/register";
     }
 }
