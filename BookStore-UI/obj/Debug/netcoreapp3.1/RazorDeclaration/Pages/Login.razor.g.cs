@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BookStore_UI.Pages.Users
+namespace BookStore_UI.Pages
 {
     #line hidden
     using System;
@@ -76,21 +76,21 @@ using BookStore_UI.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Users\Register.razor"
+#line 2 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Login.razor"
 using BookStore_UI.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Users\Register.razor"
+#line 3 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Login.razor"
 using BookStore_UI.Contracts;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Register")]
-    public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/login")]
+    public partial class Login : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -98,31 +98,28 @@ using BookStore_UI.Contracts;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 45 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Users\Register.razor"
+#line 42 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Pages\Login.razor"
        
 
-    private RegistrationModel Model = new RegistrationModel();
-    bool isFailed = false;
+    private LoginModel Model = new LoginModel();
 
-    private async Task HandleRegistration()
+    private bool response = true;
+    private async Task HandleLogin()
     {
-        var response = await _authRepo.Register(Model);
+        var response = await _authRepo.Login(Model);
 
 
         if (response)
         {
-            _navMan.NavigateTo("/Login");
+            _navManager.NavigateTo("/");
         }
-        else
-        {
-            isFailed = true;
-        }
+
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navMan { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAuthenticationRepository _authRepo { get; set; }
     }
 }

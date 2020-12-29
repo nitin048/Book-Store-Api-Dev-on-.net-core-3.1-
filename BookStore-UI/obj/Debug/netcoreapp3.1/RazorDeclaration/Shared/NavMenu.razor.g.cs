@@ -83,7 +83,7 @@ using BookStore_UI.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 38 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Shared\NavMenu.razor"
+#line 50 "E:\WORK\aspdotnet core\Book-Store-Api-Dev-on-.net-core-3.1-\BookStore-UI\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
